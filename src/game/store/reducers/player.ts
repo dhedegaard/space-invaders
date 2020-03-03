@@ -1,5 +1,6 @@
 const initialState = {
-  position: 400
+  position: 400,
+  shooting: false
 };
 
 type State = typeof initialState;
@@ -22,6 +23,16 @@ export const playerReducer = (
         ...state,
         position: Math.min(state.position + DELTA_MOVEMENT, 800 - SIDE_BUFFER)
       };
+    case "PLAYER_START_SHOOTING":
+      return {
+        ...state,
+        shooting: true
+      };
+    case "PLAYER_STOP_SHOOTING":
+      return {
+        ...state,
+        shooting: false
+      };
     default:
       return state;
   }
@@ -33,4 +44,10 @@ export type PlayerActions =
     }
   | {
       type: "PLAYER_MOVE_RIGHT";
+    }
+  | {
+      type: "PLAYER_START_SHOOTING";
+    }
+  | {
+      type: "PLAYER_STOP_SHOOTING";
     };

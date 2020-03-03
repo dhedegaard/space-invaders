@@ -1,9 +1,7 @@
 import React from "react";
-import { CssBaseline, Container } from "@material-ui/core";
 import Gameboard from "../components/Gameboard";
 import styled from "styled-components";
-import { Provider } from "react-redux";
-import { store } from "../game/store";
+import Layout from "../layout";
 
 const GameboardContainer = styled.div`
   display: flex;
@@ -11,16 +9,11 @@ const GameboardContainer = styled.div`
 `;
 
 const Index: React.FC = () => (
-  <>
-    <CssBaseline />
-    <Container maxWidth="lg">
-      <GameboardContainer>
-        <Provider store={store}>
-          <Gameboard />
-        </Provider>
-      </GameboardContainer>
-    </Container>
-  </>
+  <Layout>
+    <GameboardContainer>
+      <Gameboard />
+    </GameboardContainer>
+  </Layout>
 );
 
 export default Index;
