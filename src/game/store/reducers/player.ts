@@ -1,11 +1,11 @@
 const initialState = {
   position: 400,
-  shooting: false
+  lastShotTime: 0
 };
 
 type State = typeof initialState;
 
-const DELTA_MOVEMENT = 2;
+const DELTA_MOVEMENT = 4;
 const SIDE_BUFFER = 15;
 
 export const playerReducer = (
@@ -26,12 +26,11 @@ export const playerReducer = (
     case "PLAYER_START_SHOOTING":
       return {
         ...state,
-        shooting: true
+        lastShotTime: new Date().getTime()
       };
     case "PLAYER_STOP_SHOOTING":
       return {
-        ...state,
-        shooting: false
+        ...state
       };
     default:
       return state;

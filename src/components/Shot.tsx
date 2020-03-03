@@ -5,7 +5,7 @@ type Props = {
   y: number;
 };
 
-const WIDTH = 4;
+const WIDTH = 2;
 const HEIGHT = 8;
 const COLOR = "#fff";
 
