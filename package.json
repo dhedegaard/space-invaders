@@ -1,0 +1,29 @@
+{
+  "name": "space-invaders",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "gatsby develop"
+  },
+  "keywords": [],
+  "author": "Dennis Hedegaard <dennis@dhedegaard.dk>",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "gatsby": "^2.19.27",
+    "gatsby-cli": "^2.10.0",
+    "gatsby-plugin-typescript": "^2.2.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "styled-components": "^5.0.1",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-redux": "^7.1.7",
+    "@types/redux": "^3.6.0",
+    "@types/styled-components": "^5.0.1"
+  }
+}
