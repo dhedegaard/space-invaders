@@ -2,7 +2,9 @@
   "name": "space-invaders",
   "version": "1.0.0",
   "scripts": {
-    "start": "gatsby develop"
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "test": "echo 'no tests yet'"
   },
   "keywords": [],
   "author": "Dennis Hedegaard <dennis@dhedegaard.dk>",
