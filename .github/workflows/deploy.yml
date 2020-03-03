@@ -1,0 +1,34 @@
+name: Deploy to Github Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install -g yarn
+      - run: yarn
+      - run: yarn test
+      - run: yarn build
+      - run: echo "space-invaders.dhedegaard.dk" > ./public/CNAME
+        env:
+          CI: true
+      - name: GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v1.2.5
+        with:
+          build_dir: ./public
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
