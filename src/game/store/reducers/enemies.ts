@@ -59,11 +59,13 @@ export const enemiesReducer = (
           if (minX - ENEMY_POSITION_TICKS < ENEMY_WIDTH) {
             newDirection = "RIGHT";
           }
+          break;
         case "RIGHT":
           const maxX = max(state.enemies.map(e => e.position.x));
           if (maxX + ENEMY_POSITION_TICKS > GAME_WIDTH - ENEMY_WIDTH) {
             newDirection = "LEFT";
           }
+          break;
       }
 
       return {
