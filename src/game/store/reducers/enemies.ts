@@ -10,8 +10,8 @@ type Enemy = {
 
 const getInitialEnemies = (): Enemy[] => {
   const result: Enemy[] = [];
-  for (let y = 30; y < 80; y += 20) {
-    for (let x = 25; x < 790; x += 30) {
+  for (let y = 50; y < 200; y += 40) {
+    for (let x = 40; x < 790; x += 60) {
       result.push({
         position: { x, y },
         id: v4()

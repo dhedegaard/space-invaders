@@ -5,8 +5,8 @@ type Props = {
   y: number;
 };
 
-const WIDTH = 10;
-const HEIGHT = 5;
+const WIDTH = 40;
+const HEIGHT = 20;
 
 export const Enemy: React.FC<Props> = props => {
   const leftX = React.useMemo(() => props.x - Math.floor(WIDTH / 2), [props.x]);
