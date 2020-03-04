@@ -1,7 +1,7 @@
 import React from "react";
 import { useIsKeyPressed } from "./keyboard";
 import { useDispatch, useSelector } from "../store";
-import { v4 } from "uuid";
+import { playerFireShot } from "../store/actions/player";
 
 export const useLoop = () => {
   const isKeyPressed = useIsKeyPressed();
@@ -23,15 +23,7 @@ export const useLoop = () => {
 
     // Determine the shotting state.
     if (isKeyPressed("ArrowUp")) {
-      if (playerStateRef.current.lastShotTime + 500 <= new Date().getTime()) {
-        dispatch({ type: "PLAYER_START_SHOOTING" });
-        dispatch({
-          type: "SHOTS_ADD_SHOT",
-          id: v4(),
-          position: { x: playerStateRef.current.position, y: 500 },
-          velocity: { x: 0, y: -8 }
-        });
-      }
+      dispatch(playerFireShot());
     } else {
       dispatch({ type: "PLAYER_STOP_SHOOTING" });
     }
