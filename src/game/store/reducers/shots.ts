@@ -1,3 +1,5 @@
+import { GAME_HEIGHT } from "../../consts";
+
 type Point = { x: number; y: number };
 
 type Shot = {
@@ -37,13 +39,27 @@ export const shotsReducer = (
     case "SHOTS_TICK":
       return {
         ...state,
-        shots: state.shots.map(shot => ({
-          ...shot,
-          position: {
-            x: shot.position.x + shot.velocity.x,
-            y: shot.position.y + shot.velocity.y
-          }
-        }))
+        shots: state.shots
+          .filter(shot => {
+            // If the shot is moving up, check if it's outside the screen.
+            if (shot.velocity.y < 0 && shot.position.y < -10) {
+              return false;
+            }
+            // If the shot is moving down, check if it's below the screen.
+            if (shot.velocity.y > 0 && shot.position.y > GAME_HEIGHT) {
+              console.log("S:", shot);
+              return false;
+            }
+            // Otherwise, it's probably within bounds.
+            return true;
+          })
+          .map(shot => ({
+            ...shot,
+            position: {
+              x: shot.position.x + shot.velocity.x,
+              y: shot.position.y + shot.velocity.y
+            }
+          }))
       };
     default:
       return state;
