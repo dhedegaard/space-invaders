@@ -24,6 +24,9 @@ export const useLoop = () => {
 
     // Move the position of all the shots.
     dispatch({ type: "SHOTS_TICK" });
+
+    // Move the enemies.
+    dispatch({ type: "ENEMIES_TICK" });
   }, [isKeyPressed, dispatch]);
 
   // Run the gameloop 50 times a minute.
