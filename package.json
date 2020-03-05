@@ -11,6 +11,8 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@material-ui/core": "^4.9.5",
+    "@material-ui/styles": "^4.9.0",
+    "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.19.27",
     "gatsby-cli": "^2.10.0",
     "gatsby-plugin-material-ui": "^2.1.6",
@@ -19,6 +21,7 @@
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-is": "^16.13.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
