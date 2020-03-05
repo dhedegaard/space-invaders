@@ -8,6 +8,7 @@ const Layout: React.FC = props => (
   <>
     <CssBaseline />
     <Helmet title="Space invaders" defer={false}>
+      <html lang="en" />
       <meta name="description" content="Space Invaders, for the browser" />
     </Helmet>
     <Provider store={store}>
