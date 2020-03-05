@@ -47,7 +47,6 @@ export const shotsReducer = (
             }
             // If the shot is moving down, check if it's below the screen.
             if (shot.velocity.y > 0 && shot.position.y > GAME_HEIGHT) {
-              console.log("S:", shot);
               return false;
             }
             // Otherwise, it's probably within bounds.

@@ -2,6 +2,7 @@ import React from "react";
 import { useIsKeyPressed } from "./keyboard";
 import { useDispatch } from "../store";
 import { playerFireShot } from "../store/actions/player";
+import { shotsHandleCollisions } from "../store/actions/shots";
 
 export const useLoop = () => {
   const isKeyPressed = useIsKeyPressed();
@@ -27,6 +28,9 @@ export const useLoop = () => {
 
     // Move the enemies.
     dispatch({ type: "ENEMIES_TICK" });
+
+    // Handle shot collisions.
+    dispatch(shotsHandleCollisions());
   }, [isKeyPressed, dispatch]);
 
   // Run the gameloop 50 times a minute.

@@ -1,12 +1,10 @@
 import React from "react";
+import { ENEMY_WIDTH, ENEMY_HEIGHT } from "../game/consts";
 
 type Props = {
   x: number;
   y: number;
 };
-
-export const ENEMY_WIDTH = 40;
-export const ENEMY_HEIGHT = 20;
 
 export const Enemy: React.FC<Props> = props => {
   const leftX = React.useMemo(() => props.x - Math.floor(ENEMY_WIDTH / 2), [

@@ -2,13 +2,17 @@ import { Actions } from ".";
 import { v4 } from "uuid";
 import min from "lodash/min";
 import max from "lodash/max";
-import { GAME_WIDTH } from "../../consts";
-import { ENEMY_WIDTH } from "../../../components/Enemy";
+import { GAME_WIDTH, ENEMY_WIDTH } from "../../consts";
 
 type Direction = "LEFT" | "RIGHT";
 
 type Enemy = {
-  position: { x: number; y: number };
+  position: {
+    /** The center X position. (Not the left side) */
+    x: number;
+    /** The center Y position. (Not the top) */
+    y: number;
+  };
   id: string;
 };
 
@@ -83,6 +87,11 @@ export const enemiesReducer = (
           }
         }))
       };
+    case "ENEMIES_REMOVE":
+      return {
+        ...state,
+        enemies: state.enemies.filter(e => e.id !== action.id)
+      };
     default:
       return state;
   }
@@ -94,4 +103,8 @@ export type EnemiesActions =
     }
   | {
       type: "ENEMIES_TICK";
+    }
+  | {
+      type: "ENEMIES_REMOVE";
+      id: string;
     };

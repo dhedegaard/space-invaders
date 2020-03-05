@@ -1,4 +1,5 @@
 const initialState = {
+  /** The center X position (not the left side). */
   position: 400,
   lastShotTime: 0
 };
