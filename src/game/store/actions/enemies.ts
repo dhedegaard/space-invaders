@@ -41,11 +41,12 @@ export const enemiesHandleTick = (): any => (
       }
       break;
   }
-  // If we changed direction, move the enemies closer.
   if (direction !== newDirection) {
+    // If we changed direction, move the enemies closer.
     dispatch({ type: "ENEMIES_SET_DIRECTION", direction: newDirection });
     dispatch({ type: "ENEMIES_MOVE_CLOSER" });
   } else {
+    // Otherwise, do a tick as per usual.
     dispatch({ type: "ENEMIES_TICK" });
   }
 
