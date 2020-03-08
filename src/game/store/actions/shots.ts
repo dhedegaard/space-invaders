@@ -26,10 +26,12 @@ export const shotsHandleCollisions = (): any => async (
       type: "SHOTS_REMOVE_SHOT",
       id: collision.shotId
     });
-    dispatch({
-      type: "ENEMIES_REMOVE",
-      id: collision.enemyId
-    });
+    if (collision.type === "enemy") {
+      dispatch({
+        type: "ENEMIES_REMOVE",
+        id: collision.enemyId
+      });
+    }
   }
 };
 
