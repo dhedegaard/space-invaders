@@ -3,6 +3,7 @@ import { Store } from "..";
 import { SHOT_WIDTH, SHOT_HEIGHT } from "../../consts";
 import { getEnemyBounds } from "./enemies";
 import { createSelector } from "reselect";
+import { getPlayerBounds } from "./player";
 
 const HALF_SHOT_WIDTH = Math.floor(SHOT_WIDTH / 2);
 const HALF_SHOT_HEIGHT = Math.floor(SHOT_HEIGHT / 2);
@@ -25,32 +26,43 @@ const getShotBounds = createSelector(
  *
  * @returns A list with the ID of the shot + whatever entity was hit.
  */
-export const getShotsCollisions = (store: Store) => {
-  const shots = getShotBounds(store);
-  const enemies = getEnemyBounds(store);
+export const getShotsCollisions = createSelector(
+  [getShotBounds, getEnemyBounds, getPlayerBounds],
+  (shots, enemies, player) => {
+    const result: Array<{
+      shotId: string;
+    } & ({ type: "enemy"; enemyId: string } | { type: "player" })> = [];
 
-  const result: Array<{
-    shotId: string;
-    type: "enemy";
-    enemyId: string;
-  }> = [];
-  for (const shot of shots) {
-    for (const enemy of enemies) {
-      // Outside on the X axis.
-      if (shot.left > enemy.right || shot.right < enemy.left) {
-        continue;
+    for (const shot of shots) {
+      for (const enemy of enemies) {
+        // Outside on the X axis.
+        if (shot.left > enemy.right || shot.right < enemy.left) {
+          continue;
+        }
+        // Outside on the Y axis.
+        if (shot.top > enemy.bottom || shot.bottom < enemy.top) {
+          continue;
+        }
+        // Overlap!
+        result.push({
+          shotId: shot.id,
+          type: "enemy",
+          enemyId: enemy.id
+        });
       }
-      // Outside on the Y axis.
-      if (shot.top > enemy.bottom || shot.bottom < enemy.top) {
-        continue;
+
+      if (
+        shot.left <= player.right &&
+        shot.right >= player.left &&
+        shot.top <= player.bottom &&
+        shot.bottom >= player.top
+      ) {
+        result.push({
+          shotId: shot.id,
+          type: "player"
+        });
       }
-      // Overlap!
-      result.push({
-        shotId: shot.id,
-        type: "enemy",
-        enemyId: enemy.id
-      });
     }
+    return result;
   }
-  return result;
-};
+);
