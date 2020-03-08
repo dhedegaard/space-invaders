@@ -1,8 +1,6 @@
 import { createSelector } from "reselect";
 import { Store } from "..";
-import { PLAYER_HEIGHT, PLAYER_WIDTH } from "../../consts";
-
-const HALF_PLAYER_WIDTH = Math.floor(PLAYER_WIDTH / 2);
+import { PLAYER_HEIGHT, HALF_PLAYER_WIDTH } from "../../consts";
 
 /** Determines the bounds for all the enemies. */
 export const getPlayerBounds = createSelector(

@@ -2,7 +2,12 @@ import { Dispatch } from "redux";
 import { Actions } from "../reducers";
 import { Store } from "..";
 import { getShotsCollisions } from "../selectors/shots";
-import { ENEMY_WIDTH, GAME_WIDTH, ENEMY_POSITION_TICKS } from "../../consts";
+import {
+  ENEMY_WIDTH,
+  GAME_WIDTH,
+  ENEMY_POSITION_TICKS,
+  SHOT_VELOCITY
+} from "../../consts";
 import min from "lodash/min";
 import max from "lodash/max";
 import groupBy from "lodash/groupBy";
@@ -74,7 +79,7 @@ export const enemiesHandleTick = (): any => (
           x: randomEnemy.position.x,
           y: randomEnemy.position.y + ENEMY_WIDTH
         },
-        velocity: { x: 0, y: 1 }
+        velocity: { x: 0, y: SHOT_VELOCITY }
       });
     }
   }

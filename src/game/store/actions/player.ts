@@ -2,6 +2,7 @@ import { Actions } from "../reducers";
 import { Dispatch } from "redux";
 import { Store } from "..";
 import { v4 } from "uuid";
+import { SHOT_VELOCITY, HALF_PLAYER_HEIGHT } from "../../consts";
 
 export const playerFireShot = (): any => (
   dispatch: Dispatch<Actions>,
@@ -19,7 +20,7 @@ export const playerFireShot = (): any => (
     type: "SHOTS_ADD_SHOT",
 
     id: v4(),
-    position: { x: player.position, y: 500 },
-    velocity: { x: 0, y: -8 }
+    position: { x: player.position, y: 500 - HALF_PLAYER_HEIGHT },
+    velocity: { x: 0, y: -1 * SHOT_VELOCITY }
   });
 };
