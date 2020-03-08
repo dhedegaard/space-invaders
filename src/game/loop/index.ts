@@ -2,10 +2,8 @@ import React from "react";
 import { useIsKeyPressed } from "./keyboard";
 import { useDispatch } from "../store";
 import { playerFireShot } from "../store/actions/player";
-import {
-  shotsHandleCollisions,
-  enemiesHandleTick
-} from "../store/actions/shots";
+import { shotsHandleCollisions } from "../store/actions/shots";
+import { enemiesHandleTick } from "../store/actions/enemies";
 
 export const useLoop = () => {
   const isKeyPressed = useIsKeyPressed();

@@ -55,19 +55,34 @@ export const enemiesReducer = (
       return {
         ...state,
         lastTick: new Date().getTime(),
-        direction: action.direction,
         enemies: state.enemies.map(enemy => ({
           ...enemy,
           position: {
             ...enemy.position,
             x:
-              action.direction === "LEFT"
+              state.direction === "LEFT"
                 ? enemy.position.x - ENEMY_POSITION_TICKS
                 : enemy.position.x + ENEMY_POSITION_TICKS
           }
         }))
       };
-
+    case "ENEMIES_SET_DIRECTION":
+      return {
+        ...state,
+        direction: action.direction
+      };
+    case "ENEMIES_MOVE_CLOSER":
+      return {
+        ...state,
+        lastTick: new Date().getTime(),
+        enemies: state.enemies.map(enemy => ({
+          ...enemy,
+          position: {
+            ...enemy.position,
+            y: enemy.position.y + 20
+          }
+        }))
+      };
     case "ENEMIES_REMOVE":
       return {
         ...state,
@@ -84,7 +99,6 @@ export type EnemiesActions =
     }
   | {
       type: "ENEMIES_TICK";
-      direction: "LEFT" | "RIGHT";
     }
   | {
       type: "ENEMIES_REMOVE";
@@ -92,4 +106,11 @@ export type EnemiesActions =
     }
   | {
       type: "ENEMIES_FIRED_SHOT";
+    }
+  | {
+      type: "ENEMIES_SET_DIRECTION";
+      direction: "LEFT" | "RIGHT";
+    }
+  | {
+      type: "ENEMIES_MOVE_CLOSER";
     };
