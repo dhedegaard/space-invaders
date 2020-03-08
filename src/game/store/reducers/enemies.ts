@@ -1,8 +1,6 @@
 import { Actions } from ".";
 import { v4 } from "uuid";
-import min from "lodash/min";
-import max from "lodash/max";
-import { GAME_WIDTH, ENEMY_WIDTH } from "../../consts";
+import { ENEMY_POSITION_TICKS } from "../../consts";
 
 type Direction = "LEFT" | "RIGHT";
 
@@ -31,13 +29,13 @@ const getInitialEnemies = (): Enemy[] => {
 
 const initialState = {
   lastTick: 0,
+  lastShot: 0,
   direction: "LEFT" as Direction,
   enemies: getInitialEnemies()
 };
 
 type State = typeof initialState;
 
-const ENEMY_POSITION_TICKS = 8;
 export const enemiesReducer = (
   state: State = initialState,
   action: Actions
@@ -48,45 +46,28 @@ export const enemiesReducer = (
         ...state,
         ...initialState
       };
+    case "ENEMIES_FIRED_SHOT":
+      return {
+        ...state,
+        lastShot: new Date().getTime()
+      };
     case "ENEMIES_TICK":
-      // If we've updated recently, skip.
-      if (state.lastTick + 300 >= new Date().getTime()) {
-        return state;
-      }
-      const { direction } = state;
-
-      // Determine if we should change direction.
-      let newDirection = direction;
-      switch (direction) {
-        case "LEFT":
-          const minX = min(state.enemies.map(e => e.position.x));
-          if (minX - ENEMY_POSITION_TICKS < ENEMY_WIDTH) {
-            newDirection = "RIGHT";
-          }
-          break;
-        case "RIGHT":
-          const maxX = max(state.enemies.map(e => e.position.x));
-          if (maxX + ENEMY_POSITION_TICKS > GAME_WIDTH - ENEMY_WIDTH) {
-            newDirection = "LEFT";
-          }
-          break;
-      }
-
       return {
         ...state,
         lastTick: new Date().getTime(),
-        direction: newDirection,
+        direction: action.direction,
         enemies: state.enemies.map(enemy => ({
           ...enemy,
           position: {
             ...enemy.position,
             x:
-              direction === "LEFT"
+              action.direction === "LEFT"
                 ? enemy.position.x - ENEMY_POSITION_TICKS
                 : enemy.position.x + ENEMY_POSITION_TICKS
           }
         }))
       };
+
     case "ENEMIES_REMOVE":
       return {
         ...state,
@@ -103,8 +84,12 @@ export type EnemiesActions =
     }
   | {
       type: "ENEMIES_TICK";
+      direction: "LEFT" | "RIGHT";
     }
   | {
       type: "ENEMIES_REMOVE";
       id: string;
+    }
+  | {
+      type: "ENEMIES_FIRED_SHOT";
     };

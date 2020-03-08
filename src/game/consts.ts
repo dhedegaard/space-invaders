@@ -9,3 +9,5 @@ export const ENEMY_HEIGHT = 20;
 
 export const SHOT_WIDTH = 2;
 export const SHOT_HEIGHT = 8;
+
+export const ENEMY_POSITION_TICKS = 8;

@@ -2,7 +2,10 @@ import React from "react";
 import { useIsKeyPressed } from "./keyboard";
 import { useDispatch } from "../store";
 import { playerFireShot } from "../store/actions/player";
-import { shotsHandleCollisions } from "../store/actions/shots";
+import {
+  shotsHandleCollisions,
+  enemiesHandleTick
+} from "../store/actions/shots";
 
 export const useLoop = () => {
   const isKeyPressed = useIsKeyPressed();
@@ -27,7 +30,7 @@ export const useLoop = () => {
     dispatch({ type: "SHOTS_TICK" });
 
     // Move the enemies.
-    dispatch({ type: "ENEMIES_TICK" });
+    dispatch(enemiesHandleTick());
 
     // Handle shot collisions.
     dispatch(shotsHandleCollisions());
