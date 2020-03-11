@@ -1,6 +1,11 @@
 import React from "react";
 import { useSelector } from "../game/store";
 import { PLAYER_WIDTH, PLAYER_HEIGHT } from "../game/consts";
+import styled from "styled-components";
+
+const Image = styled.image`
+  image-rendering: pixelated;
+`;
 
 // Renders the player, based on their current position.
 export const Player = () => {
@@ -10,12 +15,12 @@ export const Player = () => {
   ]);
 
   return (
-    <rect
+    <Image
       x={leftX}
       y={500}
       width={PLAYER_WIDTH}
       height={PLAYER_HEIGHT}
-      fill="green"
+      href={require("../assets/player.png")}
     />
   );
 };
