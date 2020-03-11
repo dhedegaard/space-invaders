@@ -11,14 +11,16 @@ export const useLoop = () => {
 
   const gameloop = React.useCallback(() => {
     // Handle moving from side to side.
-    if (isKeyPressed("ArrowLeft")) {
+    const moveLeft = isKeyPressed("ArrowLeft");
+    const moveRight = isKeyPressed("ArrowRight");
+    if (moveLeft && !moveRight) {
       dispatch({ type: "PLAYER_MOVE_LEFT" });
-    } else if (isKeyPressed("ArrowRight")) {
+    } else if (moveRight && !moveLeft) {
       dispatch({ type: "PLAYER_MOVE_RIGHT" });
     }
 
     // Determine the shotting state.
-    if (isKeyPressed("ArrowUp")) {
+    if (isKeyPressed(" ")) {
       dispatch(playerFireShot());
     } else {
       dispatch({ type: "PLAYER_STOP_SHOOTING" });
